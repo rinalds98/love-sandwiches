@@ -2,7 +2,7 @@
 Tool for sales market
 """
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
-from pprint import pprint
+# from pprint import pprint
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -66,6 +66,16 @@ def update_sales_worksheet(data):
     print("sales worksheet updated succesfully\n")
 
 
+def update_surplus_worksheet(data):
+    """
+    Update surplus worksheet, add new row with the list data provided
+    """
+    print("Updating surplus worksheet...\n")
+    surplus_worksheet = SHEET.worksheet("surplus")
+    surplus_worksheet.append_row(data)
+    print("Surplus worksheet updated succesfully\n")
+
+
 def calculate_surplus_data(sales_row):
     """
     compare sales data
@@ -88,7 +98,7 @@ def main():
     sales_data = [int(num) for num in data]
     update_sales_worksheet(sales_data)
     new_surplus_data = calculate_surplus_data(sales_data)
-    print(new_surplus_data)
+    update_surplus_worksheet(new_surplus_data)
 
 
 print("Welcome to love sandwiches Data Automation\n")
